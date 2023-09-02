@@ -16,14 +16,14 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(string username, string passwword)
+        public async Task<ActionResult<AppUser>> Register(string username, string password)
         {
             using var hmac = new HMACSHA512();
 
             var user = new AppUser
             {
                 UserName = username,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(passwword)),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
                 PasswordSalt = hmac.Key
             };
 
