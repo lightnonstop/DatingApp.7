@@ -13,14 +13,7 @@ export class NavbarComponent {
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
-  }
-
-  getCurrentUser() {
-    this.accountService.currentUser$.subscribe({
-      next: (user) => (this.loggedIn = !!user),
-      error: (err) => console.log(err),
-    });
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
   login() {
