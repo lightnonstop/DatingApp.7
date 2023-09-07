@@ -27,7 +27,6 @@ export class NavbarComponent {
     this.accountService.login(this.model).subscribe({
       next: (response) => {
         console.log(response);
-        this.loggedIn = true;
       },
       error: (error) => console.log(error),
     });
@@ -35,6 +34,5 @@ export class NavbarComponent {
 
   logout() {
     this.accountService.logout();
-    this.loggedIn = false;
   }
 }
