@@ -10,13 +10,10 @@ import { User } from '../models/user';
 })
 export class NavbarComponent {
   model: any = {};
-  currentUser$: Observable<User | null> = of(null);
 
   constructor(public accountService: AccountService) {}
 
-  ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
-  }
+  ngOnInit(): void {}
 
   login() {
     this.accountService.login(this.model).subscribe({
