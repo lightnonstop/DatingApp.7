@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { Observable, of } from 'rxjs';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavbarComponent {
   model: any = {};
-  loggedIn: boolean = false;
+  currentUser$: Observable<User | null> = of(null);
 
   constructor(private accountService: AccountService) {}
 
