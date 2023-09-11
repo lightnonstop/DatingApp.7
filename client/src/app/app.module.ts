@@ -25,6 +25,7 @@ import { SharedModule } from './module/shared.module';
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
+    TestErrorComponent,
   ],
   imports: [
     BrowserModule,
