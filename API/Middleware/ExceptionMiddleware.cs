@@ -23,21 +23,25 @@ namespace API.Middleware
             {
                 await _next(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                _logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                // log the error
+                _logger.LogError(exception, exception.Message);
 
-                var response = _env.IsDevelopment()
-                ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
-                : new ApiException(context.Response.StatusCode, ex.Message, "Internal Server Error");
+                var response = context.Response;
+                response.ContentType = "application/json";
+                response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                // check application's hosting mode and set an exception object with its own different details argument
+                var exceptionObj = _env.IsDevelopment()
+                ? new ApiException(response.StatusCode, exception.Message, exception.StackTrace?.ToString())
+                : new ApiException(response.StatusCode, exception.Message, "Internal Server Error");
 
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
-                var json = JsonSerializer.Serialize(response, options);
+                var json = JsonSerializer.Serialize(exceptionObj, options);
 
-                await context.Response.WriteAsync(json);
+                await response.WriteAsync(json);
             }
         }
     }
