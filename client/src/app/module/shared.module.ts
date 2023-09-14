@@ -14,6 +14,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
       positionClass: 'toast-bottom-right',
     }),
   ],
-  exports: [BsDropdownModule, ToastrModule],
+  exports: [BsDropdownModule, ToastrModule, TabsModule],
 })
 export class SharedModule {}
