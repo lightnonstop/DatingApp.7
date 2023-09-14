@@ -10,22 +10,12 @@ export class HomeComponent {
   registerMode: boolean = false;
   users: any;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.getUsers();
-  }
+  ngOnInit(): void {}
 
   registerToggle() {
     this.registerMode = !this.registerMode;
-  }
-
-  getUsers() {
-    this.http.get('http://localhost:5000/api/users').subscribe({
-      next: (response) => (this.users = response),
-      error: (err) => console.log(err),
-      complete: () => console.log('Request has completed'),
-    });
   }
 
   cancelRegisterMode(event: boolean) {
