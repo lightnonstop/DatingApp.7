@@ -12,6 +12,6 @@ namespace API.Helpers
         }
 
         public string CurrentUsername { get; set; }
-        pubic string Gender { get; set; }
+        public string Gender { get; set; }
     }
 }
