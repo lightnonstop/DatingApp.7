@@ -24,8 +24,8 @@ import { Message } from 'src/app/models/message';
   ],
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild('memberTabs') memberTabs?: TabsetComponent;
-  member: Member | undefined;
+  @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
+  member: Member = {} as Member;
   images: GalleryItem[] = [];
   activeTab?: TabDirective;
   messages: Message[] = [];
