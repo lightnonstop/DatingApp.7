@@ -8,7 +8,7 @@ import { Message } from 'src/app/models/message';
   standalone: true,
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.css'],
-  imports: [CommonModule, TimeagoModule],
+  imports: [CommonModule, TimeagoModule, FormsModule],
 })
 export class MemberMessagesComponent implements OnInit {
   @Input() username?: string;
