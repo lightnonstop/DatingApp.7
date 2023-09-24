@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TabDirective, TabsModule, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { TimeagoModule } from 'ngx-timeago';
-import { MembersService } from 'src/app/_services/members.service';
 import { Member } from 'src/app/models/member';
 import { MemberMessagesComponent } from '../member-messages/member-messages.component';
 import { MessageService } from 'src/app/_services/message.service';
@@ -31,7 +30,6 @@ export class MemberDetailComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(
-    private memberService: MembersService,
     private route: ActivatedRoute,
     private messageService: MessageService
   ) {}
