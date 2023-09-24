@@ -37,7 +37,15 @@ export class MemberDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadMember();
+    this.route.data.subscribe({
+      next: (data) => (this.member = data['member']),
+    });
+    this.route.queryParams.subscribe({
+      next: (params) => {
+        params['tab'] && this.selectTab(params['tab']);
+      },
+    });
+    this.getImages();
   }
 
   onTabActivated(data: TabDirective) {
