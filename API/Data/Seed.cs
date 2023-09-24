@@ -17,6 +17,18 @@ namespace API.Data
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
+            var roles = new List<AppRole>
+            {
+                new() {Name = "Member"},
+                new() {Name = "Admin"},
+                new() {Name = "Moderator"}
+            };
+
+            foreach (var role in roles)
+            {
+                await roleManager.CreateAsync(role);
+            }
+
             foreach (var user in users)
             {
                 using var hmac = new HMACSHA512();
