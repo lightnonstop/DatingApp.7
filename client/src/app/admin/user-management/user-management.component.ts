@@ -13,6 +13,7 @@ export class UserManagementComponent implements OnInit {
   users: User[] = [];
   bsModalRef: BsModalRef<RolesModalComponent> =
     new BsModalRef<RolesModalComponent>();
+  availableRoles = ['Admin', 'Moderator', 'Member'];
 
   constructor(
     private adminService: AdminService,
@@ -31,14 +32,31 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  openRolesModal() {
-    const modalInitialState: ModalOptions = {
+  openRolesModal(user: User) {
+    const config = {
+      class: 'modal-dialog-centered',
       initialState: {
-        list: ['Do thing', 'Another thing', 'Something else'],
-        title: 'Test modal',
+        user: user.username,
+        availableRoles: this.availableRoles,
+        selectedRoles: [...user.roles],
       },
     };
-    this.bsModalRef = this.modalService.show(RolesModalComponent);
-    // this.bsModalRef.content!.closeBtnName = 'Close';
+    this.bsModalRef = this.modalService.show(RolesModalComponent, config);
+    this.bsModalRef.onHide?.subscribe({
+      next: () => {
+        const selectedRoles = this.bsModalRef.content?.selectedRoles;
+        if (!this.areArraysEqual(selectedRoles!, user.roles)) {
+          this.adminService
+            .updateUserRoles(user.username, selectedRoles!)
+            .subscribe({
+              next: (roles) => user.roles,
+            });
+        }
+      },
+    });
+  }
+
+  private areArraysEqual(arr1: any[], arr2: string[]): boolean {
+    return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
   }
 }
