@@ -23,7 +23,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<PresenceHub>("hub/presence");
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
