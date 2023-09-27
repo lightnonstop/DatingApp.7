@@ -50,7 +50,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    this.presenceService.stopConnection();
+    this.presenceService.stopHubConnection();
   }
 
   getDecodedToken(token: string) {
