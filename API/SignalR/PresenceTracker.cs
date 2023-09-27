@@ -2,7 +2,8 @@ namespace API.SignalR
 {
     public class PresenceTracker
     {
-        private static readonly Dictionary<string, List<string>> OnlineUsers = new();
+        private static readonly Dictionary<string, List<string>> OnlineUsers = new Dictionary<string, List<string>>();
+
         public Task UserConnected(string username, string connectionId)
         {
             lock (OnlineUsers)
