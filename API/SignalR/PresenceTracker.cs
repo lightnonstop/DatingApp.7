@@ -24,7 +24,7 @@ namespace API.SignalR
         {
             lock (OnlineUsers)
             {
-                if (OnlineUsers.ContainsKey(username)) return Task.CompletedTask;
+                if (!OnlineUsers.ContainsKey(username)) return Task.CompletedTask;
 
                 OnlineUsers[username].Remove(connectionId);
 
