@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MembersService } from 'src/app/_services/members.service';
+import { PresenceService } from 'src/app/_services/presence.service';
 import { Member } from 'src/app/models/member';
 
 @Component({
@@ -13,7 +14,8 @@ export class MemberCardComponent {
 
   constructor(
     private memberService: MembersService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public presenceService: PresenceService
   ) {}
 
   addLike(member: Member) {
