@@ -72,5 +72,29 @@ namespace API.SignalR
             var stringCompare = string.CompareOrdinal(caller, other) < 0;
             return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
         }
+
+        private async Task<bool> AddToGroup(string groupName)
+        {
+            var group = await _messageRepository.GetMessageGroup(groupName);
+            var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
+
+            if (group == null)
+            {
+                group = new Group(groupName);
+                _messageRepository.AddGroup(group);
+            }
+
+            group.Connections.Add(connection);
+
+            return await _messageRepository.SaveAllAsync();
+        }
+
+        private async Task RemoveFromMessageGroup()
+        {
+            var connection = await _messageRepository.GetConnection(Context.ConnectionId);
+
+            _messageRepository.RemoveConnection(connection);
+            await _messageRepository.SaveAllAsync();
+        }
     }
 }
