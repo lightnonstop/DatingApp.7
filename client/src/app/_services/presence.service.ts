@@ -36,6 +36,16 @@ export class PresenceService {
       this.onlineUsersSource.next(usernames);
       console.log(usernames);
     });
+
+    this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
+      this.toastr
+        .info(`${knownAs} has sent a message. Click here!`)
+        .onTap.pipe(take(1))
+        .subscribe({
+          next: () =>
+            this.router.navigateByUrl(`/members/${username}?tab=Messages`),
+        });
+    });
   }
 
   stopHubConnection() {
