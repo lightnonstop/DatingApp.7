@@ -41,7 +41,6 @@ export class PresenceService {
 
     this.hubConnection.on('GetOnlineUsers', (usernames) => {
       this.onlineUsersSource.next(usernames);
-      console.log(usernames);
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
