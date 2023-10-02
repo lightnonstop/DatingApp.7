@@ -112,7 +112,7 @@ namespace API.SignalR
 
             if (await _messageRepository.SaveAllAsync()) return group;
 
-            throw new HubException("Failed tp add to group");
+            throw new HubException("Failed to add to group");
         }
 
         private async Task<Group> RemoveFromMessageGroup()
