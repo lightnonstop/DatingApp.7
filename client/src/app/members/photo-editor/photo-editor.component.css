@@ -1,8 +1,24 @@
 .nv-file-over {
-    border: dotted 3px #333;
-    background: #eeeeee;
+	border: dotted 3px #333;
+	background: #eeeeee;
 }
 
 input[type=file] {
-    color: transparent;
+	color: transparent;
+}
+
+.not-approved {
+	opacity: 0.2;
+}
+
+.img-wrapper {
+	position: relative;
+}
+
+.img-text {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	top: 47%;
+	transform: translate(-50%, -50%);
 }
