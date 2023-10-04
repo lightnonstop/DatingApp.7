@@ -23,7 +23,7 @@ namespace API.Data
 
         public async Task<IEnumerable<PhotoForApprovalDto>> GetUnapprovedPhotos()
         {
-            return await _context.Photos.Where(p => p.isApproved == false).Select(u => new PhotoForApprovalDto
+            return await _context.Photos.IgnoreQueryFilters().Where(p => p.isApproved == false).Select(u => new PhotoForApprovalDto
             {
                 Id = u.Id,
                 Url = u.Url,
