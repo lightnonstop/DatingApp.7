@@ -84,7 +84,7 @@ namespace API.Controllers
 
             var user = await _unitOfWork.PhotoRepository.GetUserByPhotoId(photoId);
 
-            if (!user.Photos.Any(p => p.IsMain)) photo.isApproved = true;
+            if (!user.Photos.Any(p => p.IsMain)) photo.IsMain = true;
 
             await _unitOfWork.Complete();
 
