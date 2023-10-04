@@ -32,6 +32,15 @@ namespace API.Data
             }).ToListAsync();
         }
 
+        public async Task<AppUser> GetUserByPhotoId(int photoId)
+        {
+            return await _context.Users
+                .Include(p => p.Photos)
+                .IgnoreQueryFilters()
+                .Where(u => u.Photos.Any(p => p.Id == photoId))
+                .FirstOrDefaultAsync();
+        }
+
         public void RemovePhoto(Photo photo)
         {
             _context.Photos.Remove(photo);
