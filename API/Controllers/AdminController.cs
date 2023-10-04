@@ -78,7 +78,13 @@ namespace API.Controllers
         {
             var photo = await _unitOfWork.PhotoRepository.GetPhotoById(photoId);
 
+            if (photo == null) NotFound("Could not find any photo match.");
+
             photo.isApproved = true;
+
+            var user = await _unitOfWork.PhotoRepository.GetUserByPhotoId(photoId);
+
+            if (!user.Photos.Any(p => p.IsMain)) photo.isApproved = true;
 
             await _unitOfWork.Complete();
 
