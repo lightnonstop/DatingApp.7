@@ -57,5 +57,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
             .HasOne(u => u.Sender)
             .WithMany(m => m.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Photo>()
+            .HasQueryFilter(p => p.isApproved);
     }
 }
